@@ -2,7 +2,7 @@
 
 class joya {
     constructor(id, nombre, material, precio) {
-        this.id = id,
+            this.id = id,
             this.nombre = nombre,
             this.material = material,
             this.precio = precio
@@ -14,28 +14,26 @@ class joya {
 }
 
 //Instanciación de objetos: 
-const joya1 = new joya(1, "Aretes de Oro 'Ópalo Andino", "Oro Corporativo", 1350)
+const joya1 = new joya(1, "Anillo de Oro Cubo Ópalo Andino", "Oro Corporativo", 3400)
 
-const joya2 = new joya(2, "Collar de Oro 'Ópalo Andino", "Oro Ecológico", 2000)
+const joya2 = new joya(2, "Anillo de Oro Martillado", "Oro Ecológico", 950)
 
-const joya3 = new joya(3, "Anillo de Oro Ópalo Andino", "Oro Fairmined", 1550)
+const joya3 = new joya(3, "Anillo de Plata Granalla y Lapislázuli", "Plata", 850)
 
-const joya4 = new joya(4, "Aretes de Plata Chunk Pirita", "Plata", 350)
+const joya4 = new joya(4, "Anillo de Plata Drops Ópalo Andino", "Plata", 650)
 
-const joya5 = new joya(5, "Collar de Plata Drops", "Plata", 340)
+const joya5 = new joya(5, "Brazalete de Oro Labradorita y Esmeralda", "Oro", 6350)
 
-const joya6 = new joya(6, "Anillo de Plata Bateadoras", "Plata", 100)
+const joya6 = new joya(6, "Brazalete de Oro Sauce con Ópalo Andino", "Oro", 4700)
 
-const joya7 = new joya(7, "Anillo de Oro Dream Like", "Oro", 2500)
+const joya7 = new joya(7, "Brazalete de Plata Colección Art Deco", "Palta", 1200)
 
-const joya8 = new joya(8, "Anillo de Oro Martillado Grueso", "Oro", 1560)
+const joya8 = new joya(8, "Brazalete de Plata Pacífico Ópalo Andino", "Plata", 1150)
 
-const joya9 = new joya(9, "Anillo de Plata Drops Ópalo Andino", "Plata", 380)
-
-const joya10 = new joya(10, "Anillo de Oro Hiper Petit Rubí", "Oro Fairmined", 1200)
+const joya9 = new joya(9, "Collar de Oro Sauce Ópalo Andino Sissai Gold", "Oro", 2450)
 
 
-const vitrina = [joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10];
+const vitrina = [joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9];
 
 //Funciones:
 
@@ -118,10 +116,10 @@ function filtrarPorPrecioMax(array) {
 }
 
 function eliminarjoya(array) {
-    
+
     verCatalogo(array)
     let eliminarID = parseInt(prompt("Ingrese el id que desea eliminar"))
-    
+
     let arrayID = array.map(joya => joya.id)
     console.log(arrayID)
 
@@ -158,7 +156,7 @@ function ordenarAlfabeticamenteMaterial(array) {
         if (a.material < b.material) {
             return -1
         }
-            return 0
+        return 0
     })
 
     verCatalogo(arrayAlfabetico)
@@ -194,9 +192,9 @@ function ordenar(array) {
 function filtrarPorNombreMaterialIncludes(array) {
     let datoBusqueda = prompt("Ingrese el nombre o material que desea encontrar en una búsqueda parcial");
     if (datoBusqueda !== null) {
-        datoBusqueda = datoBusqueda.trim(); 
+        datoBusqueda = datoBusqueda.trim();
         if (datoBusqueda !== "") {
-            
+
             let busqueda = array.filter(
                 (dato) => dato.nombre.toLowerCase().includes(datoBusqueda.toLowerCase()) || dato.material.toLowerCase().includes(datoBusqueda.toLowerCase())
             );
