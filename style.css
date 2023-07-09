@@ -7,6 +7,20 @@
     background-color: #552121;
 }
 
+.formBusq {
+    padding-left: 20px;
+}
+
+.formOrd{
+    padding-top: 15px;
+}
+
+/* BOTONES */
+
+.btnBolsa {
+    padding-top: 15px;
+}
+
 #btnbls {
     background-color: #552121;
     border: solid #552121;
@@ -16,6 +30,41 @@
     background-color: #b51c1c;
     border: solid #faf7f7;
 }
+
+#guardarJoya {
+    background-color: #552121;
+    border: solid #552121;
+    color: white;
+}
+
+#guardarJoya:hover {
+    background-color: #b51c1c;
+    border: solid #faf7f7;
+}
+
+#verCatalogo {
+    background-color: #552121;
+    border: solid #552121;
+    color: white;
+}
+
+#verCatalogo:hover {
+    background-color: #b51c1c;
+    border: solid #faf7f7;
+}
+
+#ocultarCatalogo {
+    background-color: #552121;
+    border: solid #552121;
+    color: white;
+}
+
+#ocultarCatalogo:hover {
+    background-color: #b51c1c;
+    border: solid #faf7f7;
+}
+
+/* CARD */
 
 .precioCard{
     font-size: 1rem;

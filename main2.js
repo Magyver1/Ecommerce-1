@@ -15,7 +15,7 @@ class joya {
     }
 }
 
-//Instanciación de objetos: 
+//INTANCIACION DE OBJETOS
 const joya1 = new joya(1, "Anillo de Oro Cubo Ópalo Andino", "Oro Corporativo", 3400, "Anillo Cubo Opalo Andino.jpeg")
 
 const joya2 = new joya(2, "Anillo de Oro Martillado", "Oro Ecológico", 950, "Anillo Oro Martillado.jpeg")
@@ -57,122 +57,90 @@ const joya19 = new joya(19, "Pulsera de Plata Oceanos Colección Acqua", "Plata"
 const joya20 = new joya(20, "Pulsera de Plata Triple Triangulos Colección Kené", "Plata", 260, "Pulsera Triangulo Triple Turmalina Negra y Pirita.jpeg")
 
 
-const vitrina = [joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10, joya11, joya12, joya13, joya14, joya15, joya16, joya17, joya18, joya19, joya20];
+const vitrina = []
 
-//Funciones:
+vitrina.push(joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10, joya11, joya12, joya13, joya14, joya15, joya16, joya17, joya18, joya19, joya20);
 
-function agregarJoya() {
-    let nombreIngresado = prompt("Ingrese el nombre de la joya")
-    let materialIngresado = prompt("Ingrese el nombre del material")
-    let precioIngresado = parseInt(prompt("Ingrese el precio de la joya"))
 
-    const joyaNuevo = new joya(vitrina.length + 1, nombreIngresado, materialIngresado, precioIngresado)
+let joyaDiv = document.getElementById("joya")
 
-    vitrina.push(joyaNuevo)
+//FUNCIONES
 
-}
-
-function verCatalogo(array) {
-
-    console.log(`Nuestro catalogo es: `)
-
+function mostrarCatalogo(array) {
+    joyaDiv.innerHTML = ``
     for (let joya of array) {
-        console.log(joya.id, joya.nombre, joya.material, joya.precio)
+        let nuevaJoyaDiv = document.createElement("div")
+
+        nuevaJoyaDiv.className = "col-12 col-md-6 col-lg-4 card-container"
+        nuevaJoyaDiv.innerHTML = `<div id="${joya.id}" class="card" style="width: 18rem;">
+    <img class="card-img-top img-fluid" style="height: 200px;" src= "assets/${joya.imagen}"
+        alt=${joya.nombre}>
+    <div class="card-body">
+        <h4 class="card-title">${joya.nombre}</h4>
+        <p>Material: ${joya.material}</p>
+        <p class="precioCard">Precio: ${joya.precio} S/.</p>
+        <button id="btnbls" class="btn btn-outline-success">Agregar a la Bolsa</button>
+    </div>
+    </div>`
+        joyaDiv.appendChild(nuevaJoyaDiv)
     }
 }
 
-function mostrarCatalogoForEach(array) {
-    console.log(`Nuestros joyas disponibles son:`)
+let verCatalogo = document.getElementById("verCatalogo");
+//PASAR EL EVENTO
+verCatalogo.addEventListener("click", () => {
+    mostrarCatalogo(vitrina)
+})
 
-    array.forEach(
-        joya => joya.mostrarInfojoya()
-    )
-}
+let ocultarCatalogo = document.getElementById("ocultarCatalogo");
 
-function buscarPormaterial(array) {
-    let materialBuscado = prompt("Ingrese el material de la joya que desea buscar");
-    let busqueda = array.filter(
-        joya => joya.material.toLowerCase() === materialBuscado.toLowerCase()
-    );
+ocultarCatalogo.onclick = () => {
+    joyaDiv.innerHTML = ``
+};
 
-    if (busqueda.length === 0) {
-        console.log(`No se encontraron joyas con el material "${materialBuscado}".`);
-    } else {
-        verCatalogo(busqueda);
+// ORDENAR EL CATALOGO
+
+let ordenCat = document.getElementById("ordenCat")
+
+ordenCat.addEventListener("change", () => {
+    console.log(ordenCat.value)
+
+    switch (ordenCat.value) {
+        case "1":
+            ordenarMenorMayor(vitrina)
+            break
+        case "2":
+            ordenarMayorMenor(vitrina)
+            break
+        case "3":
+            ordenarAlfabeticamenteMaterial(vitrina)
+            break
+        default:
+            mostrarCatalogo(vitrina)
+            break
+
     }
-}
-
-function buscarPornombre(array) {
-    let nombreBusqueda = prompt("Ingrese el nombre de la joya que está buscando");
-    let busqueda = array.filter(
-        joya => joya.nombre.toLowerCase().includes(nombreBusqueda.toLowerCase())
-    );
-
-    if (busqueda.length === 0) {
-        console.log(`No se encontraron joyas con el nombre "${nombreBusqueda}".`);
-    } else {
-        verCatalogo(busqueda);
-    }
-}
-
-function buscarPormaterial(array) {
-    let materialBuscado = prompt("Ingrese el material de la joya que desea buscar");
-    let busqueda = array.filter(
-        joya => joya.material.toLowerCase().includes(materialBuscado.toLowerCase())
-    );
-
-    if (busqueda.length === 0) {
-        console.log(`No se encontraron joyas con el material "${materialBuscado}".`);
-    } else {
-        verCatalogo(busqueda);
-    }
-}
-
-function filtrarPorPrecioMax(array) {
-    let precioIngresado = parseInt(prompt("Ingrese el precio máximo que puede pagar"));
-    let busqPrecio = array.filter(
-        (joya) => { return joya.precio <= precioIngresado }
-    );
-    console.log("Resultado de tu búsqueda por precio máximo:");
-    busqPrecio.forEach((joya) => {
-        console.log(joya.id, joya.nombre, joya.material, joya.precio);
-    });
-}
-
-function eliminarjoya(array) {
-
-    verCatalogo(array)
-    let eliminarID = parseInt(prompt("Ingrese el id que desea eliminar"))
-
-    let arrayID = array.map(joya => joya.id)
-    console.log(arrayID)
-
-    let indice = arrayID.indexOf(eliminarID)
-    console.log(indice)
-
-    array.splice(indice, 1)
-    verCatalogo(array)
-
-}
+})
 
 function ordenarMenorMayor(array) {
-    //copia del array original, para aplicar sort y no modificar vitrina
+    //COPIANDO EL ARRAY PARA NO MODIFICAR VITRINA
     const menorMayor = [].concat(array)
     console.log(menorMayor)
-    //de forma ascendente por el atributo precio
+    //ORDENAR DE MENOR A MAYOR
     menorMayor.sort((a, b) => a.precio - b.precio)
-    verCatalogo(menorMayor)
+    mostrarCatalogo(menorMayor)
 }
 
 function ordenarMayorMenor(array) {
     const mayorMenor = [].concat(array)
-    //ordenar forma descendente 
+    // ORDENAR DE MAYOR A MENOR
     mayorMenor.sort((elem1, elem2) => elem2.precio - elem1.precio)
-    verCatalogo(mayorMenor)
+    mostrarCatalogo(mayorMenor)
 }
 
 function ordenarAlfabeticamenteMaterial(array) {
     const arrayAlfabetico = [].concat(array)
+    //ORDENA ALFAVETICAMENTE POR TIPO DE MATERIAL
     arrayAlfabetico.sort((a, b) => {
         if (a.material > b.material) {
             return 1
@@ -183,143 +151,32 @@ function ordenarAlfabeticamenteMaterial(array) {
         return 0
     })
 
-    verCatalogo(arrayAlfabetico)
+    mostrarCatalogo(arrayAlfabetico)
 }
 
-function ordenar(array) {
-    let opcion = parseInt(prompt(`
-          1 - Ordenar joyas de menor a mayor precio
-          2 - Ordenar joyas de mayor a menor precio
-          3 - Ordenar las joyas alfabeticamente
-          4 - Ordenar por precio máximo`))
+//AGREGAR UNA JOJA
+let agregarJoya = document.getElementById("guardarJoya")
 
-    switch (opcion) {
-        case 1:
-            ordenarMenorMayor(array)
-            break
-        case 2:
-            ordenarMayorMenor(array)
-            break
-        case 3:
-            ordenarAlfabeticamenteMaterial(array)
-            break
-        case 4:
-            filtrarPorPrecioMax(array);
-            break;
-        default:
-            console.log(`La opcion ${opcion} no es válida`)
-            break
+agregarJoya.addEventListener("click", function (event) {
 
-    }
+    event.preventDefault()
+
+    guardarJoya(vitrina)
+})
+
+//AGREGAR JOYA AL DOM
+function guardarJoya(array) {
+    let joyaIngresada = document.getElementById("joyaIngreso")
+    let materialIngresado = document.getElementById("materialIngreso")
+    let precioIngresado = document.getElementById("precioIngreso")
+
+    const joyaNuevo = new joya(array.length + 1, joyaIngresada.value, materialIngresado.value, precioIngresado.value, "JoyaNueva.png")
+
+    array.push(joyaNuevo)
+    mostrarCatalogo(array)
+
+    //RESET FORMULARIO
+    joyaIngresada.value = ""
+    materialIngresado.value = ""
+    precioIngresado.value = ""
 }
-
-function filtrarPorNombreMaterialIncludes(array) {
-    let datoBusqueda = prompt("Ingrese el nombre o material que desea encontrar en una búsqueda parcial");
-    if (datoBusqueda !== null) {
-        datoBusqueda = datoBusqueda.trim();
-        if (datoBusqueda !== "") {
-
-            let busqueda = array.filter(
-                (dato) => dato.nombre.toLowerCase().includes(datoBusqueda.toLowerCase()) || dato.material.toLowerCase().includes(datoBusqueda.toLowerCase())
-            );
-            if (busqueda.length === 0) {
-                console.log(`El dato "${datoBusqueda}" no está en nuestro catálogo como nombre o como material.`);
-            } else {
-                verCatalogo(busqueda);
-            }
-        } else {
-            console.log("No se ingresó ningún dato de búsqueda.");
-        }
-    } else {
-        console.log("El ingreso de datos fue cancelado.");
-    }
-}
-
-function menu() {
-    let nombre = "";
-
-    while (nombre === "") {
-        nombre = prompt("Hola, por favor ingresa tu nombre:");
-
-        if (nombre === null) {
-            console.log("Gracias por visitarnos, vuelve pronto.");
-            return;
-        }
-
-        if (nombre.trim() === "") {
-            alert("Nombre no válido. Por favor, ingrese un nombre válido.");
-            nombre = "";
-        }
-    }
-
-    alert(`¡Bienvenid@, ${nombre}!`);
-
-    let salirMenu = false;
-
-    do {
-        let opcionIngresada = parseInt(prompt(`${nombre}, por favor ingresa la opción deseada:
-        1 - Consultar el catálogo
-        2 - Agregar una joya
-        3 - Borrar una joya        
-        4 - Buscar por tipo de material
-        5 - Buscar por nombre de la joya
-        6 - Ordenar las joyas
-        0 - Salir del menú`));
-
-        switch (opcionIngresada) {
-            case 1:
-                verCatalogo(vitrina);
-                break;
-            case 2:
-                agregarJoya();
-                break;
-            case 3:
-                eliminarjoya(vitrina);
-                break;
-            case 4:
-                buscarPormaterial(vitrina);
-                break;
-            case 5:
-                buscarPornombre(vitrina);
-                break;
-            case 6:
-                ordenar(vitrina);
-                break;
-            case 0:
-                console.log(`Gracias por utilizar nuestra app, ${nombre}. ¡Saludos!`);
-                salirMenu = true;
-                break;
-            default:
-                console.log("Opción inválida. Por favor, ingrese una opción válida del menú.");
-                break;
-        }
-    } while (!salirMenu);
-}
-
-// menu();
-
-console.log(new Date())
-
-
-let joyaDiv = document.getElementById("joya")
-
-function mostrarCatalogo(array){
-
-for (let joya of array) {
-    let nuevaJoyaDiv = document.createElement("div")
-
-    nuevaJoyaDiv.className = "col-12 col-md-6 col-lg-4 card-container"
-    nuevaJoyaDiv.innerHTML = `<div id="${joya.id}" class="card" style="width: 18rem;">
-    <img class="card-img-top img-fluid" style="height: 200px;" src= "assets/${joya.imagen}"
-        alt=${joya.nombre}>
-    <div class="card-body">
-        <h4 class="card-title">${joya.nombre}</h4>
-        <p>Material: ${joya.material}</p>
-        <p class="precioCard">Precio: ${joya.precio} S/.</p>
-        <button id="btnbls" class="btn btn-outline-success">Agregar a la Bolsa</button>
-    </div>
-    </div>`
-    joyaDiv.appendChild(nuevaJoyaDiv)
-}
-}
-mostrarCatalogo(vitrina)
