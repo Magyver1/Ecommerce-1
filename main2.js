@@ -57,9 +57,17 @@ const joya19 = new joya(19, "Pulsera de Plata Oceanos Colección Acqua", "Plata"
 const joya20 = new joya(20, "Pulsera de Plata Triple Triangulos Colección Kené", "Plata", 260, "Pulsera Triangulo Triple Turmalina Negra y Pirita.jpeg")
 
 
-const vitrina = []
+let vitrina = []
 
-vitrina.push(joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10, joya11, joya12, joya13, joya14, joya15, joya16, joya17, joya18, joya19, joya20);
+if (localStorage.getItem("vitrina")) {
+    vitrina = JSON.parse(localStorage.getItem("vitrina"))
+    
+
+} else {
+    vitrina.push(joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10, joya11, joya12, joya13, joya14, joya15, joya16, joya17, joya18, joya19, joya20);
+    localStorage.setItem("vitrina", JSON.stringify(vitrina))
+}
+
 
 
 let joyaDiv = document.getElementById("joya")
@@ -173,6 +181,9 @@ function guardarJoya(array) {
     const joyaNuevo = new joya(array.length + 1, joyaIngresada.value, materialIngresado.value, precioIngresado.value, "JoyaNueva.png")
 
     array.push(joyaNuevo)
+
+    localStorage.setItem("vitrina", JSON.stringify(array))
+
     mostrarCatalogo(array)
 
     //RESET FORMULARIO
@@ -180,3 +191,32 @@ function guardarJoya(array) {
     materialIngresado.value = ""
     precioIngresado.value = ""
 }
+
+// MODO OSCURO
+
+let modoOscuro = document.getElementById("modoOscuro")
+let modoClaro = document.getElementById("modoClaro")
+let resetModo = document.getElementById("resetModo")
+
+// CONSULTA LOCALSTORAGE
+
+let darkMode = localStorage.getItem("darkMode")
+if (darkMode == "true")
+    document.body.classList.add("modoDark")
+
+modoOscuro.addEventListener("click", () => {
+    document.body.classList.add("modoDark")
+    localStorage.setItem("darkMode", true)
+})
+
+modoClaro.addEventListener("click", () => {
+    document.body.classList.remove("modoDark")
+    localStorage.setItem("darkMode", false)
+
+})
+
+resetModo.addEventListener("click", () => {
+    console.log("funciona eliminar")
+    localStorage.removeItem("darkMode")
+})
+

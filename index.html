@@ -30,20 +30,21 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">                    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="d-flex formBusq" role="search">
                         <input class="form-control me-2" type="search" placeholder="Ingresa tu busqueda"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
+                    </form>                    
                     <div class="ms-auto formOrd">
                         </ul>
                         <ul>
-                            <select id="ordenCat" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select id="ordenCat" class="form-select form-select-sm"
+                                aria-label=".form-select-sm example">
                                 <option selected>Ordenar catálogo por:</option>
                                 <option value="1">Menor a mayor</option>
                                 <option value="2">Mayor a menor</option>
-                                <option value="3">Alfabeticamente por material</option>                                
+                                <option value="3">Alfabeticamente por material</option>
                             </select>
                         </ul>
                     </div>
@@ -58,6 +59,22 @@
                 </div>
             </div>
         </nav>
+
+        <!-- FORMULARIO PARA TIPO DE MODO -->
+
+        <div class="container m-4">
+            <div class="row">
+                <div class="col-1">
+                    <button id="modoOscuro" class="btn btn-dark">Oscuro</button>
+                </div>
+                <div class="col-2">
+                    <button id="modoClaro" class="btn btn-light">Claro</button>
+                </div>
+                <div class="col-2">
+                    <button id="resetModo" class="btn btn-light">Borrar preferencia</button>
+                </div>
+            </div>
+        </div>
 
         <!--FORMULARIO PARA AGREGAR JOYA-->
 

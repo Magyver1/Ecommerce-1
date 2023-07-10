@@ -92,3 +92,13 @@
     flex-wrap: wrap;
     justify-content:space-around
 }
+
+/* BOTON MODO OSCURO */
+
+.modoDark{
+    color: white;
+    background-color: rgb(39, 38, 38);
+}
+
+
+
