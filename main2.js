@@ -61,16 +61,42 @@ let vitrina = []
 
 if (localStorage.getItem("vitrina")) {
     vitrina = JSON.parse(localStorage.getItem("vitrina"))
-    
+
 
 } else {
     vitrina.push(joya1, joya2, joya3, joya4, joya5, joya6, joya7, joya8, joya9, joya10, joya11, joya12, joya13, joya14, joya15, joya16, joya17, joya18, joya19, joya20);
     localStorage.setItem("vitrina", JSON.stringify(vitrina))
 }
 
+//CAPTURAS DEL DOM
 
-
+let modoOscuro = document.getElementById("modoOscuro")
+let modoClaro = document.getElementById("modoClaro")
+let resetModo = document.getElementById("resetModo")
 let joyaDiv = document.getElementById("joya")
+let buscador = document.getElementById("buscador")
+let coincide = document.getElementById("coincide")
+
+
+let darkMode = localStorage.getItem("darkMode")
+if (darkMode == "true")
+    document.body.classList.add("modoDark")
+
+modoOscuro.addEventListener("click", () => {
+    document.body.classList.add("modoDark")
+    localStorage.setItem("darkMode", true)
+})
+
+modoClaro.addEventListener("click", () => {
+    document.body.classList.remove("modoDark")
+    localStorage.setItem("darkMode", false)
+
+})
+
+resetModo.addEventListener("click", () => {
+    console.log("funciona eliminar")
+    localStorage.removeItem("darkMode")
+})
 
 //FUNCIONES
 
@@ -86,7 +112,7 @@ function mostrarCatalogo(array) {
     <div class="card-body">
         <h4 class="card-title">${joya.nombre}</h4>
         <p>Material: ${joya.material}</p>
-        <p class="precioCard">Precio: ${joya.precio} S/.</p>
+        <p class="precioCard ofertaJoja ${joya.precio <= 500 && "ofertaJoya"}">Precio: ${joya.precio} S/.</p>
         <button id="btnbls" class="btn btn-outline-success">Agregar a la Bolsa</button>
     </div>
     </div>`
@@ -192,31 +218,25 @@ function guardarJoya(array) {
     precioIngresado.value = ""
 }
 
-// MODO OSCURO
+//FILTRO POR JOYA O MATERIAL
 
-let modoOscuro = document.getElementById("modoOscuro")
-let modoClaro = document.getElementById("modoClaro")
-let resetModo = document.getElementById("resetModo")
+function infoBuscar(buscando, array) {
+    let busqueda = array.filter(
+        (dato) => dato.nombre.toLowerCase().includes(buscando.toLowerCase()) ||
+            dato.material.toLowerCase().includes(buscando.toLowerCase())
+    );
 
-// CONSULTA LOCALSTORAGE
+    busqueda.length == 0
+        ? (coincide.innerHTML = `<h3 class = "buscat">No hay coincidencias en el catálogo</h3>`, mostrarCatalogo(busqueda))
+        : mostrarCatalogo(busqueda);
 
-let darkMode = localStorage.getItem("darkMode")
-if (darkMode == "true")
-    document.body.classList.add("modoDark")
+    setTimeout(() => {
+        coincide.innerHTML = "";
+    }, 5000);
 
-modoOscuro.addEventListener("click", () => {
-    document.body.classList.add("modoDark")
-    localStorage.setItem("darkMode", true)
+}
+document.getElementById("buscarbtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    infoBuscar(buscador.value, vitrina);
+    buscador.value = "";
 })
-
-modoClaro.addEventListener("click", () => {
-    document.body.classList.remove("modoDark")
-    localStorage.setItem("darkMode", false)
-
-})
-
-resetModo.addEventListener("click", () => {
-    console.log("funciona eliminar")
-    localStorage.removeItem("darkMode")
-})
-
