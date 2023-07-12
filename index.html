@@ -51,8 +51,8 @@
                     <div class="btnBolsa">
                         <ul style="list-style: none;" className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <a id="botonBolsa" data-bs-toggle="modal" data-bs-target="#idModalBolsa"
-                                    class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                                <a id="botonBolsa" class="btn btn-secondary"><i
+                                        class="fas fa-shopping-cart fa-1x"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -81,23 +81,21 @@
         <form id="formAgregarJoya" class="col-lg-6 m-5">
             <div class="mb-3">
                 <label for="joya" class="form-label">Joya</label>
-                <input type="text" class="form-control" id="joyaIngreso" aria-describedby="joya">
-
+                <input type="text" class="form-control" id="joyaIngreso" aria-describedby="joya" required>
             </div>
             <div class="mb-3">
                 <label for="material" class="form-label">Material</label>
-                <input type="text" class="form-control" id="materialIngreso" aria-describedby="material">
-
+                <input type="text" class="form-control" id="materialIngreso" aria-describedby="material" required>
             </div>
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio:</label>
-                <input type="text" class="form-control" id="precioIngreso" aria-describedby="precio">
-
+                <input type="text" class="form-control" id="precioIngreso" aria-describedby="precio" required>
             </div>
+            <br><br><div id="mensajePopup"></div><br>
             <div>
-                <button type="text" id="guardarJoya" class="btn btn-success">Guardar Joya</button>
+                <button type="submit" id="guardarJoya" class="btn btn-success">Guardar Joya</button>
             </div>
-        </form>
+        </form>        
 
         <!--BOTONES PARA EL CATALOGO-->
 
@@ -112,18 +110,30 @@
         </div>
         <div class="container">
             <div id="coincide"></div>
-            <div id="joya" class="row">
+            <div id="joya" class="row"></div>
+        </div>
 
+        <!-- Botón para abrir la bolsa de compras
+        <button id="botonBolsa">Bolsa</button> -->
+
+        <!-- Modal de la bolsa -->
+        <div id="modalBolsa" class="modal">
+            <div class="modal-content">
+                <span id="modalClose" class="modal-close">&times;</span>
+                <div id="modalBody"></div>
             </div>
         </div>
 
-
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h3>El producto fue agregado a la bolsa</h3>
+            </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-            </script>
-        <!-- <script src="main.js"></script> -->
-        <script src="main2.js"></script>
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+        <script src="main.js"></script>
     </main>
 </body>
 
